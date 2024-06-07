@@ -1,5 +1,5 @@
 import { RequestStatus, TIngredient } from '@utils-types';
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { fetchIngredients } from '../thunks/ingredientThunk';
 import { isActionPending, isActionRejected } from '../../utils/redux';
 
@@ -8,17 +8,23 @@ export const sliceName = 'ingredients';
 export interface TIngredientState {
   ingredients: TIngredient[];
   status: RequestStatus;
+  isIngredientsLoading: boolean;
 }
 
 const initialState: TIngredientState = {
   ingredients: [],
-  status: RequestStatus.Idle
+  status: RequestStatus.Idle,
+  isIngredientsLoading: false
 };
 
 export const ingredientSlice = createSlice({
   name: sliceName,
   initialState,
-  reducers: {},
+  reducers: {
+    setIsIngredientLoading: (state, action: PayloadAction<boolean>) => {
+      state.isIngredientsLoading = action.payload;
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchIngredients.fulfilled, (state, action) => {
@@ -29,19 +35,18 @@ export const ingredientSlice = createSlice({
         state.status = RequestStatus.Loading;
       })
       .addMatcher(isActionRejected(ingredientSlice.name), (state) => {
-        state.status = RequestStatus.Loading;
+        state.status = RequestStatus.Failed;
       });
   },
   selectors: {
     getIngredientsByType: (state, type) =>
       state.ingredients.filter((ingredient) => ingredient.type === type),
-    getIngredients: (state) => state.ingredients
+    getIngredients: (state) => state.ingredients,
+    getIsIngredientLoading: (state) => state.isIngredientsLoading
   }
 });
 
 export default ingredientSlice.reducer;
 
-export const { getIngredientsByType, getIngredients } =
+export const { getIngredientsByType, getIngredients, getIsIngredientLoading } =
   ingredientSlice.selectors;
-
-// отображаются ингредиенты по вкладкам

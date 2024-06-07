@@ -36,20 +36,34 @@ export const burgerConstructorSlice = createSlice({
       const index = action.payload;
       state.ingredients.splice(index, 1);
     },
-    moveIngredient: (state, action: PayloadAction<{index: number, direction: string}>) => {
+    moveIngredient: (
+      state,
+      action: PayloadAction<{ index: number; direction: string }>
+    ) => {
       const { index, direction } = action.payload;
-      const newIndex = direction === 'up' ? index -1 : index +1;
+      const newIndex = direction === 'up' ? index - 1 : index + 1;
       if (newIndex >= 0) {
         const savingState = state.ingredients[index];
         state.ingredients[index] = state.ingredients[newIndex];
         state.ingredients[newIndex] = savingState;
-      } 
+      }
+    },
+    clearIngredients: (state) => {
+      state.ingredients = initialState.ingredients;
+      state.bun = initialState.bun;
     }
   }
 });
 
 export default burgerConstructorSlice.reducer;
-export const { addIngredient, removeIngredient, moveIngredient } = burgerConstructorSlice.actions;
-export const getBun = (state: { burgerConstructor: TBurgerConstructor }) => state.burgerConstructor.bun;
-export const getConstructorIngredients = (state: { burgerConstructor: TBurgerConstructor }) => state.burgerConstructor.ingredients
-
+export const {
+  addIngredient,
+  removeIngredient,
+  moveIngredient,
+  clearIngredients
+} = burgerConstructorSlice.actions;
+export const getBun = (state: { burgerConstructor: TBurgerConstructor }) =>
+  state.burgerConstructor.bun;
+export const getConstructorIngredients = (state: {
+  burgerConstructor: TBurgerConstructor;
+}) => state.burgerConstructor.ingredients;

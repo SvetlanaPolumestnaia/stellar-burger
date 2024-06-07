@@ -7,7 +7,7 @@ import { addIngredient } from '../../services/slicers/burgerContructorSlice';
 
 export const BurgerIngredient: FC<TBurgerIngredientProps> = memo(
   ({ ingredient, count }) => {
-      /** TODO: дописать handleAdd - done */
+    /** TODO: дописать handleAdd - done */
     const location = useLocation();
     const dispatch = useDispatch();
 

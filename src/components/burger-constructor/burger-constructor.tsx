@@ -1,28 +1,59 @@
 import { FC, useEffect, useMemo } from 'react';
 import { TConstructorIngredient } from '@utils-types';
 import { BurgerConstructorUI } from '@ui';
-import { useSelector } from '../../services/store';
-import { getBun, getConstructorIngredients } from '../../services/slicers/burgerContructorSlice';
+import { useDispatch, useSelector } from '../../services/store';
+import { useNavigate } from 'react-router-dom';
+import {
+  getBun,
+  getConstructorIngredients,
+  clearIngredients
+} from '../../services/slicers/burgerContructorSlice';
+import {
+  getOrder,
+  getOrderRequest,
+  closeModal
+} from '../../services/slicers/orderSlice';
+import { fetchOrderBurger } from '../../services/thunks/orderThunk';
+import { getUser } from '../../services/slicers/userSlice';
+import { fetchFeed } from '../../services/thunks/feedThunk';
 
 export const BurgerConstructor: FC = () => {
-  /** TODO: взять переменные constructorItems - done, orderRequest и orderModalData из стора */
+  /** TODO: взять переменные constructorItems - done, orderRequest и orderModalData из стора - done */
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const bun = useSelector(getBun);
   const ingredients = useSelector(getConstructorIngredients);
-  
+
   const constructorItems = {
     bun: bun,
     ingredients
   };
 
-  const orderRequest = false;
+  const orderRequest = useSelector(getOrderRequest);
 
-  const orderModalData = null;
+  const orderModalData = useSelector(getOrder);
+
+  const user = useSelector(getUser);
+  const ingredientsIds = ingredients.map((ingredient) => ingredient._id);
+  const bunId = bun?._id;
 
   const onOrderClick = () => {
-    if (!constructorItems.bun || orderRequest) return;
+    if (bunId && ingredientsIds.length >= 1) {
+      const orderId = [bunId].concat(ingredientsIds, [bunId]);
+      if (user && !orderRequest) {
+        dispatch(fetchOrderBurger(orderId));
+        dispatch(fetchFeed());
+      } else {
+        navigate('/login');
+      }
+    }
   };
-  const closeOrderModal = () => {};
+
+  const closeOrderModal = () => {
+    dispatch(closeModal());
+    dispatch(clearIngredients());
+  };
 
   const price = useMemo(
     () =>
