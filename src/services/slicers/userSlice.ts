@@ -35,7 +35,8 @@ const sliceUser = createSlice({
   },
   selectors: {
     getUser: (state: TUserState) => state.user,
-    getUserOrders: (state) => state.userOrders
+    getUserOrders: (state) => state.userOrders,
+    getIsAuthChecked: (state) => state.isAuthChecked
   },
   extraReducers: (builder) => {
     builder
@@ -64,6 +65,6 @@ const sliceUser = createSlice({
 
 export default sliceUser.reducer;
 
-export const { getUser, getUserOrders } = sliceUser.selectors;
+export const { getUser, getUserOrders, getIsAuthChecked } = sliceUser.selectors;
 
 export const { setUser, setIsAuthChecked } = sliceUser.actions;
