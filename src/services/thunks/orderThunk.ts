@@ -14,7 +14,6 @@ export const fetchOrderByNumber = createAsyncThunk(
   async (number: string) => {
     const num = Number(number);
     const response = await getOrderByNumberApi(num);
-    console.log('API response:', response);
     return response;
   }
 );

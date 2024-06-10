@@ -38,10 +38,6 @@ export const checkUserAuth = createAsyncThunk(
     if (getCookie('accessToken')) {
       getUserApi()
         .then((response) => dispatch(setUser(response.user)))
-        .catch(() => {
-          deleteCookie('accessToken');
-          localStorage.removeItem('refreshToken');
-        })
         .finally(() => dispatch(setIsAuthChecked(true)));
     } else {
       dispatch(setIsAuthChecked(true));
