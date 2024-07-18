@@ -1,27 +1,33 @@
-import { ThunkAction, ThunkDispatch, thunk } from 'redux-thunk';
-
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import burgerConstructorReducer from './slicers/burgerContructorSlice';
+import ingredientsReducer from './slicers/ingredientSlice';
+import orderReducer from './slicers/orderSlice';
+import userReducer from './slicers/userSlice';
+import feedReducer from './slicers/feedSlice';
 import {
   TypedUseSelectorHook,
   useDispatch as dispatchHook,
   useSelector as selectorHook
 } from 'react-redux';
 
-const store = {};
+const rootReducer = combineReducers({
+  ingredients: ingredientsReducer,
+  burgerConstructor: burgerConstructorReducer,
+  order: orderReducer,
+  feed: feedReducer,
+  user: userReducer
+});
 
-export type RootState = any;
+const store = configureStore({
+  reducer: rootReducer,
+  devTools: process.env.NODE_ENV !== 'production'
+});
 
-type TApplicationActions = any;
+export type RootState = ReturnType<typeof store.getState>;
 
-export type AppThunk<Return = void> = ThunkAction<
-  Return,
-  RootState,
-  unknown,
-  TApplicationActions
->;
+export type AppDispatch = typeof store.dispatch;
 
-export type AppDispatch = ThunkDispatch<RootState, never, TApplicationActions>;
-
-export const useDispatch = () => dispatchHook<AppDispatch>();
+export const useDispatch: () => AppDispatch = () => dispatchHook();
 export const useSelector: TypedUseSelectorHook<RootState> = selectorHook;
 
 export default store;
