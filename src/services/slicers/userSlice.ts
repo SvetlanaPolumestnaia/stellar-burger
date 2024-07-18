@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { TOrder, TUser, RequestStatus } from '@utils-types';
+import { TOrder, TUser, RequestStatus } from '../../utils/types';
 import {
   fetchLogin,
   fetchProfileOrders,

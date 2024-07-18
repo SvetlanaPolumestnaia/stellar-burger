@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { RequestStatus, TOrder } from '@utils-types';
+import { RequestStatus, TOrder } from '../../utils/types';
 import { fetchFeed } from '../thunks/feedThunk';
 import { isActionPending, isActionRejected } from '../../utils/redux';
 

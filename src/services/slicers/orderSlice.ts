@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { RequestStatus, TOrder } from '@utils-types';
+import { RequestStatus, TOrder } from '../../utils/types';
 import { fetchOrderBurger, fetchOrderByNumber } from '../thunks/orderThunk';
 import { isActionPending, isActionRejected } from '../../utils/redux';
 
