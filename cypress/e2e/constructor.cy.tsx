@@ -1,4 +1,5 @@
 /// <reference types="cypress" />
+const testUrl = 'http://localhost:4000/';
 
 describe('Проверка перехвата запроса к эндпоинту', () => {
     it('Должен возвращать моковые данные при запросе к /api/ingredients', () => {
@@ -6,7 +7,7 @@ describe('Проверка перехвата запроса к эндпоинт
         fixture: 'ingredients.json'
       }).as('getIngredients');
   
-      cy.visit('http://localhost:4000/');
+      cy.visit(testUrl);
   
       cy.wait('@getIngredients').its('response.statusCode').should('eq', 200);
     });
@@ -14,7 +15,7 @@ describe('Проверка перехвата запроса к эндпоинт
   
 describe('Проверка добавления ингредиента из списка в конструктор', () => {
 it('должен добавить ингредиент из списка в конструктор', () => {
-    cy.visit('http://localhost:4000/');
+    cy.visit(testUrl);
     const ingredientsToAdd = [
     'Флюоресцентная булка R2-D3',
     'Биокотлета из марсианской Магнолии',
@@ -29,7 +30,7 @@ it('должен добавить ингредиент из списка в ко
 
 describe('Проверка модального окна ингредиента', () => {
     it('должно открыться при клике на ингредиент и закрыться при клике на крестик и оверлей', () => {
-      cy.visit('http://localhost:4000/');
+      cy.visit(testUrl);
       cy.contains('Флюоресцентная булка R2-D3').click();
       cy.get('#modals > div:first-child').as('modal');
       cy.get('@modal').should('exist');
@@ -56,7 +57,7 @@ describe('Процесс создания заказа', () => {
     });
   
     it('Собирается бургер', () => {
-      cy.visit('http://localhost:4000/');
+      cy.visit(testUrl);
   
       const ingredientsToAdd = [
         'Флюоресцентная булка R2-D3',
