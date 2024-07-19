@@ -8,7 +8,7 @@ export const order = {
   ingredients: [
     '643d69a5c3f7b9001cfa093c', // bun
     '643d69a5c3f7b9001cfa0941', // main
-    '643d69a5c3f7b9001cfa0942'  // sauce
+    '643d69a5c3f7b9001cfa0942' // sauce
   ]
 };
 

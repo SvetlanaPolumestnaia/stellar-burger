@@ -1,4 +1,4 @@
 export const user = {
-    email: 'test@example.com',
-    name: 'Test User'
-  };
+  email: 'test@test.com',
+  name: 'Test User'
+};
