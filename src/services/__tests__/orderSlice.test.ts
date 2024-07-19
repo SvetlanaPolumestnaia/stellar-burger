@@ -10,7 +10,7 @@ import { RequestStatus } from '../../utils/types';
 import { order } from '../mockData/orderMockData';
 
 describe('Проверка orderSlice', () => {
-  test('Should return the initial state', () => {
+  test('Проверка начального состояния', () => {
     const state = orderReducer(undefined, { type: 'unknown' });
     expect(state).toEqual(initialState);
   });
@@ -54,7 +54,7 @@ describe('Проверка orderSlice', () => {
     expect(state.status).toBe(RequestStatus.Failed);
   });
 
-  test('Селекторы работают', () => {
+  test('Проверка селекторов', () => {
     const state = {
       order: {
         order: order,

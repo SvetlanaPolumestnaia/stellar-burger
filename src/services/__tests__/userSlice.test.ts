@@ -17,7 +17,7 @@ import { user } from '../mockData/userMockData';
 import { orders } from '../mockData/orderMockData';
 
 describe('Проверка userSlice', () => {
-  test('Should return the initial state', () => {
+  test('Проверка начального состояния', () => {
     const state = userReducer(undefined, { type: 'unknown' });
     expect(state).toEqual(initialState);
   });
@@ -72,7 +72,7 @@ describe('Проверка userSlice', () => {
     expect(state.status).toBe(RequestStatus.Failed);
   });
 
-  test('Селекторы работают', () => {
+  test('Проверка селекторов', () => {
     const state = {
       user: {
         isAuthChecked: true,

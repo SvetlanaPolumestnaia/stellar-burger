@@ -10,7 +10,7 @@ import { RequestStatus } from '../../utils/types';
 import { bun, main, sauce, ingredients } from '../mockData/ingredientsMockData';
 
 describe('Проверка IngredientSlice', () => {
-  test('Возвращает начальное сосояние', () => {
+  test('Проверка начального состояния', () => {
     const state = ingredientReducer(undefined, { type: 'unknown' });
     expect(state).toEqual(initialState);
   });
@@ -43,7 +43,7 @@ describe('Проверка IngredientSlice', () => {
     expect(state.status).toBe(RequestStatus.Failed);
   });
 
-  test('Селекторы работают', () => {
+  test('Проверка селекторов', () => {
     const state = {
       ingredients: {
         ingredients,
