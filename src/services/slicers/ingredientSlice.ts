@@ -1,4 +1,4 @@
-import { RequestStatus, TIngredient } from '@utils-types';
+import { RequestStatus, TIngredient } from '../../utils/types';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { fetchIngredients } from '../thunks/ingredientThunk';
 import { isActionPending, isActionRejected } from '../../utils/redux';
@@ -11,7 +11,7 @@ export interface TIngredientState {
   isIngredientsLoading: boolean;
 }
 
-const initialState: TIngredientState = {
+export const initialState: TIngredientState = {
   ingredients: [],
   status: RequestStatus.Idle,
   isIngredientsLoading: false
@@ -50,3 +50,5 @@ export default ingredientSlice.reducer;
 
 export const { getIngredientsByType, getIngredients, getIsIngredientLoading } =
   ingredientSlice.selectors;
+
+export const { setIsIngredientLoading } = ingredientSlice.actions;

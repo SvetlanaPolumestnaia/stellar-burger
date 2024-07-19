@@ -1,0 +1,9 @@
+{
+    "success": true,
+    "accessToken": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NjA2ODU5OTdlZGUwMDAxZDA2ZWQyZiIsImlhdCI6MTcyMTM3MDI0MiwiZXhwIjoxNzIxMzcxNDQyfQ.L5A-GrMRTCrFWcm6sa774KJNg9a8cs2ZPPVqSuayBds",
+    "refreshToken": "5548a9af7794036f9f96bb39aa3346002a4a9461b5890f20c5542d82810e946e2db94b5e866ba6a6",
+    "user": {
+        "email": "sv.bakhanova@yandex.com",
+        "name": "Svetlana"
+    }
+}

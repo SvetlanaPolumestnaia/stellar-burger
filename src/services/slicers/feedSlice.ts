@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { RequestStatus, TOrder } from '@utils-types';
+import { RequestStatus, TOrder } from '../../utils/types';
 import { fetchFeed } from '../thunks/feedThunk';
 import { isActionPending, isActionRejected } from '../../utils/redux';
 
-type TFeedState = {
+export type TFeedState = {
   orders: TOrder[];
   total: number;
   totalToday: number;
@@ -32,6 +32,7 @@ export const feedSlice = createSlice({
         state.orders = action.payload.orders;
         state.total = action.payload.total;
         state.totalToday = action.payload.totalToday;
+        state.status = RequestStatus.Success;
       })
       .addMatcher(isActionPending(feedSlice.name), (state) => {
         state.status = RequestStatus.Loading;
